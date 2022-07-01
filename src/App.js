@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Card from './components/Card';
 
 function App() {
   const shuffle = (array) => {
@@ -21,17 +22,20 @@ function App() {
   };
 
   const [state, setState] = useState({
-    score: 0,
-    highScore: 0,
-    prevValue: '',
     arr: ['a', 'b', 'c', 'd'],
   });
 
   useEffect(() => {
-    setState((state.arr = shuffle(state.arr)));
-  }, [score]);
+    setState({ arr: shuffle(state.arr) });
+  }, []);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      {state.arr.map((e, i) => {
+        return <Card key={i} value={e} />;
+      })}
+    </div>
+  );
 }
 
 export default App;
