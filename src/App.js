@@ -60,19 +60,21 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       <Scoreboard score={score} bestScore={bestScore} />
-      {shortArr.map((e, i) => {
-        return (
-          <Card
-            key={i + Date()}
-            imgsrc={e[0]}
-            value={e[1]}
-            callback={() => clickHandler(e)}
-          />
-        );
-      })}
-    </div>
+      <div>
+        {shortArr.map((e, i) => {
+          return (
+            <Card
+              key={i + Date()}
+              imgsrc={e[0]}
+              value={e[1]}
+              callback={() => clickHandler(e)}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
 
