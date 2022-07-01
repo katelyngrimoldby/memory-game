@@ -1,6 +1,6 @@
-function Card({ value }) {
+function Card({ value, callback }) {
   return (
-    <div className="card">
+    <div className="card" onClick={() => callback(value)}>
       <span>{value}</span>
     </div>
   );
