@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from './components/Card';
 import Scoreboard from './components/Scoreboard';
+import IMAGES from './imgDir';
 
 function App() {
   const shuffle = (array) => {
@@ -26,13 +27,15 @@ function App() {
     score: 0,
     bestScore: 0,
     prevValue: '',
-    arr: ['a', 'b', 'c', 'd'],
+    arr: IMAGES,
+    shortArr: [],
   });
 
-  const { score, bestScore, prevValue, arr } = state;
+  const { score, bestScore, prevValue, arr, shortArr } = state;
 
   useEffect(() => {
     setState((prevState) => ({ ...prevState, arr: shuffle(arr) }));
+    setState((prevState) => ({ ...prevState, shortArr: arr.slice(0, 6) }));
   }, []);
 
   const clickHandler = (curValue) => {
@@ -53,14 +56,20 @@ function App() {
       setState((prevState) => ({ ...prevState, prevValue: curValue }));
     }
     setState((prevState) => ({ ...prevState, arr: shuffle(arr) }));
+    setState((prevState) => ({ ...prevState, shortArr: arr.slice(0, 6) }));
   };
 
   return (
     <div className="App">
       <Scoreboard score={score} bestScore={bestScore} />
-      {state.arr.map((e, i) => {
+      {shortArr.map((e, i) => {
         return (
-          <Card key={i + Date()} value={e} callback={() => clickHandler(e)} />
+          <Card
+            key={i + Date()}
+            imgsrc={e[0]}
+            value={e[1]}
+            callback={() => clickHandler(e)}
+          />
         );
       })}
     </div>
