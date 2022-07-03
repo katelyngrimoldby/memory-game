@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Card from './components/Card';
+import CardGrid from './components/CardGrid';
 import Scoreboard from './components/Scoreboard';
 import IMAGES from './imgDir';
 
@@ -62,18 +62,7 @@ function App() {
   return (
     <>
       <Scoreboard score={score} bestScore={bestScore} />
-      <div>
-        {shortArr.map((e, i) => {
-          return (
-            <Card
-              key={i + Date()}
-              imgsrc={e[0]}
-              value={e[1]}
-              callback={() => clickHandler(e)}
-            />
-          );
-        })}
-      </div>
+      <CardGrid arr={shortArr} callback={clickHandler} />
     </>
   );
 }
